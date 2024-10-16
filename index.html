@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Packages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .package {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .package h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .featured {
+            border: 2px solid #3498db;
+            background-color: #ebf5fb;
+        }
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .buy-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Available Internet Packages</h1>
+        <div id="packages"></div>
+    </div>
+
+    <script>
+        // Sample data (replace this with actual API call)
+        const packagesData = [{"id":"9d422968-117b-4349-98e4-d3f244522f10","user_id":"d0437c0b-7c74-485d-975e-1cd9904cecbb","plan_name":"test_tsh","billing_plan_type":"billing_plan","type":"time","time_plan_goes_online":"01","expires_after":"1","expires_after_unit":"day","price":"10.00","currency":"KES","max_upload_speed":"unlimited","max_download_speed":"unlimited","max_number_of_purchases":1,"over_period_of":"daily","display_name":"Launching WIFI","simultaneous_use":1,"stations":"none","allowed_customers":null,"burst_upload_speed":"unlimited","burst_download_speed":"unlimited","burst_upload_threshold":null,"burst_download_threshold":null,"burst_upload_time":null,"max_download_speed_advanced":null,"que_priority":null,"session_timeout":0,"total_bandwidth":null,"bandwidth_unit":null,"is_active":true,"purchasable_until":"2024-10-17T00:00:00.000000Z","package_image":null,"additional_info":"[]","featured":true,"nas":null,"override_valid_for_by_day_of_purchase":false,"advanced_options_enabled":false,"created_at":"2024-10-16T10:34:40.000000Z","updated_at":"2024-10-16T10:34:40.000000Z"}];
+
+        function displayPackages(packages) {
+            const packagesContainer = document.getElementById('packages');
+            packages.forEach(package => {
+                const packageElement = document.createElement('div');
+                packageElement.className = `package ${package.featured ? 'featured' : ''}`;
+                packageElement.innerHTML = `
+                    <h2>${package.display_name}</h2>
+                    <p class="price">${package.price} ${package.currency}</p>
+                    <p><strong>Duration:</strong> ${package.expires_after} ${package.expires_after_unit}(s)</p>
+                    <p><strong>Upload Speed:</strong> ${package.max_upload_speed}</p>
+                    <p><strong>Download Speed:</strong> ${package.max_download_speed}</p>
+                    <p><strong>Simultaneous Use:</strong> ${package.simultaneous_use} device(s)</p>
+                    ${package.featured ? '<p><strong>Featured Package</strong></p>' : ''}
+                    <a href="#" class="buy-button" onclick="buyPackage('${package.id}')">Buy Now</a>
+                `;
+                packagesContainer.appendChild(packageElement);
+            });
+        }
+
+        function buyPackage(packageId) {
+            // This function will be implemented later
+            console.log('Buy package with ID:', packageId);
+            alert('Thank you for your interest! Purchasing will be available soon.');
+        }
+
+        // Call the function with the sample data
+        displayPackages(packagesData);
+
+        // In a real-world scenario, you'd fetch data from the API like this:
+        /*
+        fetch('https://alias-capture-bb-uniprotkb.trycloudflare.com/api/packages?user_id=d0437c0b-7c74-485d-975e-1cd9904cecbb')
+            .then(response => response.json())
+            .then(data => displayPackages(data))
+            .catch(error => console.error('Error fetching packages:', error));
+        */
+    </script>
+</body>
+</html>
